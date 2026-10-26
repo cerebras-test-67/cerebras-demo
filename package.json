@@ -1,0 +1,12 @@
+{
+  "name": "fieldstone-dispatch",
+  "version": "2.5.3",
+  "private": true,
+  "description": "Scheduling and dispatch for HVAC, plumbing and electrical contractors",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "test": "vitest run",
+    "lint": "eslint src"
+  }
+}
