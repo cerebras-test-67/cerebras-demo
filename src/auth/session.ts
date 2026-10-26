@@ -20,6 +20,13 @@ export async function sendMagicLink(email: string) {
   await mailer.send(email, "Your Fieldstone sign-in link", `https://app.fieldstonehq.com/login/${token}`);
 }
 
+/** Companies with SAML turned on sign in through their identity provider instead. */
+export async function signInMethod(email: string): Promise<"password" | "saml"> {
+  const domain = email.split("@")[1]?.toLowerCase();
+  const sso = domain ? await db.ssoConnections.findByDomain(domain) : undefined;
+  return sso?.enabled ? "saml" : "password";
+}
+
 export async function endSession(token: string) {
   await db.sessions.delete({ token });
 }
